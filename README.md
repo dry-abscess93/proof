@@ -1,5 +1,9 @@
 # @cronozen/mcp-server
 
+[![Smithery](https://smithery.ai/badge/cronozen/proof)](https://smithery.ai/servers/cronozen/proof)
+[![npm](https://img.shields.io/npm/v/cronozen)](https://www.npmjs.com/package/cronozen)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 Tamper-proof audit trail for AI decisions. Record, verify, and export cryptographic proof chains via MCP.
 
 ## Overview
@@ -23,12 +27,22 @@ This MCP server exposes 6 tools for AI decision provenance — recording decisio
 
 ## Quick Start
 
-### Prerequisites
+### Install via Smithery (Recommended)
+
+```bash
+smithery mcp add cronozen/proof
+```
+
+Or connect directly: `https://proof.cronozen.com`
+
+### Self-hosted
+
+#### Prerequisites
 
 - Node.js 18+
 - A running Cronozen API endpoint
 
-### Install
+#### Install
 
 ```bash
 npm install
