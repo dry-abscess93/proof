@@ -1,0 +1,65 @@
+{
+  "@context": "https://schema.cronozen.com/proof/v1",
+  "@type": "DecisionEvidence",
+  "version": "1.0",
+  "exportedAt": "2026-03-12T13:09:30.000Z",
+  "evidence": {
+    "id": "cmmnhiobs0002bfi9mlu8eof4",
+    "decisionId": "sdk-e2e-1773320967968",
+    "status": "sealed",
+    "evidenceLevel": "AUDIT_READY",
+    "event": {
+      "type": "agent_execution",
+      "actor": {
+        "id": "settlement_agent",
+        "type": "ai_agent",
+        "name": "Settlement Calculator"
+      },
+      "action": {
+        "type": "settlement_calculated",
+        "description": "3월 정산금 자동 계산",
+        "input": {
+          "instructorId": "inst-001",
+          "periodMonth": "2026-03",
+          "sessions": 12
+        },
+        "output": {
+          "totalAmount": 1440000,
+          "unitPrice": 120000
+        }
+      },
+      "occurredAt": "2026-03-12T13:09:27.968Z",
+      "aiContext": {
+        "model": "internal-v1",
+        "confidence": 0.95,
+        "reasoning": "완료된 세션 12건 × 단가 120,000원"
+      }
+    },
+    "approval": {
+      "approver": {
+        "id": "director_park",
+        "type": "human",
+        "name": "박원장"
+      },
+      "result": "approved",
+      "reason": "세션 수 확인 완료, 정산 승인",
+      "approvedAt": "2026-03-12T13:09:29.446Z"
+    },
+    "chain": {
+      "hash": "9943798c6313e9dd2cffa71686176d4125a65777293ff3718cb0e2f3d9a674dd",
+      "index": 1,
+      "previousHash": null,
+      "domain": "proof"
+    },
+    "sealedAt": "2026-03-12T13:09:29.446Z",
+    "createdAt": "2026-03-12T13:09:28.000Z"
+  },
+  "verification": {
+    "hashAlgorithm": "SHA-256",
+    "chainDomain": "proof",
+    "chainIndex": 1,
+    "chainHash": "9943798c6313e9dd2cffa71686176d4125a65777293ff3718cb0e2f3d9a674dd",
+    "previousHash": null,
+    "verifyUrl": "https://proof.cronozen.com/verify/cmmnhiobs0002bfi9mlu8eof4"
+  }
+}

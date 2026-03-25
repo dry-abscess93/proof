@@ -1,0 +1,68 @@
+{
+  "name": "@cronozen/dp-schema-public",
+  "version": "0.1.0",
+  "description": "Cronozen Decision Proof public schema - types, enums, JSON-LD definitions",
+  "license": "Apache-2.0",
+  "author": "Cronozen <dev@cronozen.com> (https://cronozen.com)",
+  "homepage": "https://github.com/cronozen/dp-schema-public#readme",
+  "bugs": {
+    "url": "https://github.com/cronozen/dp-schema-public/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cronozen/dp-schema-public.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./enums": {
+      "types": "./dist/enums.d.ts",
+      "import": "./dist/enums.mjs",
+      "require": "./dist/enums.js"
+    },
+    "./jsonld": {
+      "types": "./dist/jsonld-schema.d.ts",
+      "import": "./dist/jsonld-schema.mjs",
+      "require": "./dist/jsonld-schema.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "decision-proof",
+    "dpu",
+    "governance",
+    "audit",
+    "json-ld",
+    "schema",
+    "evidence-level",
+    "compliance",
+    "cronozen"
+  ]
+}

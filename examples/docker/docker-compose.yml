@@ -1,0 +1,26 @@
+# Cronozen MCP Server — Self-Hosted Docker Setup
+#
+# Usage:
+#   cp .env.example .env
+#   # Edit .env with your API token
+#   docker-compose up
+#
+# The MCP server will be available at http://localhost:3100/mcp
+
+services:
+  mcp-server:
+    build:
+      context: ../../mcp-server
+      dockerfile: Dockerfile
+    ports:
+      - "3100:3100"
+    environment:
+      - CRONOZEN_API_URL=${CRONOZEN_API_URL:-https://mcp.cronozen.com}
+      - CRONOZEN_API_TOKEN=${CRONOZEN_API_TOKEN}
+      - MCP_PORT=3100
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3100/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped

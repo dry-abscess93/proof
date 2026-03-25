@@ -1,0 +1,11 @@
+{
+  "name": "cronozen-quickstart",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "cronozen": "latest"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
+}

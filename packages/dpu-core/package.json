@@ -1,0 +1,68 @@
+{
+  "name": "@cronozen/dpu-core",
+  "version": "0.1.0",
+  "description": "Cronozen DPU Core - hash chain computation, canonicalization, storage adapter interface, CLI",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "cronozen-dpu": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./adapter": {
+      "types": "./dist/adapter.d.ts",
+      "import": "./dist/adapter.mjs",
+      "require": "./dist/adapter.js"
+    },
+    "./hash": {
+      "types": "./dist/hash.d.ts",
+      "import": "./dist/hash.mjs",
+      "require": "./dist/hash.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "test": "node --test --import tsx src/__tests__/core.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@cronozen/dp-schema-public": "0.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "decision-proof",
+    "hash-chain",
+    "governance",
+    "audit",
+    "cronozen",
+    "dpu"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cronozen/thearound-ops",
+    "directory": "packages/dpu-core"
+  },
+  "author": "Cronozen (thearound Inc.)",
+  "homepage": "https://github.com/cronozen/thearound-ops/tree/main/packages/dpu-core",
+  "engines": {
+    "node": ">=18"
+  }
+}

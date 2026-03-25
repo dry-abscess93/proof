@@ -1,0 +1,7 @@
+src/
+examples/
+*.test.ts
+__tests__/
+tsconfig.json
+.DS_Store
+node_modules/
