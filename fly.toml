@@ -1,0 +1,25 @@
+app = "cronozen-proof-api"
+primary_region = "nrt"  # Tokyo (서울에서 가장 가까운 Fly 리전)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3200"
+  PUBLIC_URL = "https://api.cronozen.com"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 3200
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[mounts]
+  source = "proof_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
