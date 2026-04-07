@@ -11,6 +11,15 @@ export function registerProofRecord(
     'Records an AI execution as a Decision Proof Unit (DPU). Creates a cryptographically chained proof record with SHA-256 hash chain. Returns the created DPU with decision_id and chain hash.',
     {
       domain: z.string().describe('Business domain (e.g. rehab_care, market, edu, mentor, welfare)'),
+      type: z
+        .enum([
+          'agent_execution', 'workflow_step', 'human_approval', 'ai_recommendation',
+          'automated_action', 'policy_decision', 'escalation',
+          'file_change', 'approval', 'access', 'import', 'export', 'integration',
+          'system', 'custom',
+        ])
+        .optional()
+        .describe('Event type classification. Default: agent_execution (auto-detected from MCP context)'),
       purpose: z.string().describe('Purpose/reason for the decision'),
       final_action: z.string().describe('The action that was taken (e.g. CREATE, UPDATE, APPROVE)'),
       evidence_level: z
@@ -26,7 +35,11 @@ export function registerProofRecord(
     },
     async (args) => {
       try {
-        const result = await apiClient.createDPU(args);
+        const result = await apiClient.createDPU({
+          ...args,
+          type: args.type || 'agent_execution',
+          source_type: 'ai', // MCP 경로는 항상 AI 소스
+        });
         return {
           content: [
             {

@@ -23,8 +23,11 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { serve } from '@hono/node-server';
 import { authMiddleware, createApiKey } from './middleware/auth.js';
+import { quotaMiddleware } from './middleware/quota.js';
 import { decisionsRouter } from './routes/decisions.js';
 import { evidenceRouter } from './routes/evidence.js';
+import { filesRouter } from './routes/files.js';
+import { integrationsRouter, webhooksRouter } from './routes/integrations.js';
 import { getDB } from './db/connection.js';
 
 const app = new Hono();
@@ -45,6 +48,9 @@ app.get('/', (c) => {
       health: '/health',
       decisions: '/decision-events',
       evidence: '/evidence/:id',
+      files: '/files/upload',
+      integrations: '/integrations/google-drive/connect',
+      webhooks: '/webhooks/google-drive',
       verify: '/verify/:id',
     },
   });
@@ -57,6 +63,10 @@ app.get('/health', (c) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// ─── Webhooks (unauthenticated — external services call directly) ──
+
+app.route('/webhooks', webhooksRouter);
 
 // ─── Public Verification (unauthenticated) ─────────────────────────
 
@@ -92,10 +102,21 @@ app.get('/verify/:id', (c) => {
 // ─── Authenticated Routes ──────────────────────────────────────────
 
 app.use('/decision-events/*', authMiddleware);
+app.use('/decision-events/*', quotaMiddleware());
 app.use('/evidence/*', authMiddleware);
+app.use('/files/*', authMiddleware);
+app.use('/files/*', quotaMiddleware());
+// OAuth callback은 인증 불필요 (Google이 리다이렉트) — 나머지는 인증 필요
+app.use('/integrations/google-drive/connect', authMiddleware);
+app.use('/integrations/google-drive/folders', authMiddleware);
+app.use('/integrations/google-drive/watch', authMiddleware);
+app.use('/integrations/google-drive/disconnect', authMiddleware);
+app.use('/integrations/status', authMiddleware);
 
 app.route('/decision-events', decisionsRouter);
 app.route('/evidence', evidenceRouter);
+app.route('/files', filesRouter);
+app.route('/integrations', integrationsRouter);
 
 // ─── Bootstrap ─────────────────────────────────────────────────────
 

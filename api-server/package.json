@@ -12,10 +12,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "hono": "^4.6.0",
+    "@cronozen/dpu-core": "file:../packages/dpu-core",
     "@hono/node-server": "^1.13.0",
     "better-sqlite3": "^11.0.0",
-    "@cronozen/dpu-core": "file:../packages/dpu-core"
+    "googleapis": "^171.4.0",
+    "hono": "^4.6.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.0",

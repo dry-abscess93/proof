@@ -24,6 +24,7 @@ export type {
   ApprovalActor,
   // Enums
   DecisionEventType,
+  EventSourceType,
   DecisionEventStatus,
   EvidenceStatus,
   ApprovalResult,

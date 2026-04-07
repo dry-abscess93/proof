@@ -24,6 +24,13 @@ export function getDB(): Database.Database {
     db.pragma('journal_mode = WAL');
     db.pragma('foreign_keys = ON');
     db.exec(SCHEMA_SQL);
+
+    // Migration: source_type 컬럼 추가 (기존 DB 호환)
+    const columns = db.prepare("PRAGMA table_info(decision_events)").all() as { name: string }[];
+    if (!columns.some(c => c.name === 'source_type')) {
+      db.exec("ALTER TABLE decision_events ADD COLUMN source_type TEXT NOT NULL DEFAULT 'manual'");
+      db.exec("CREATE INDEX IF NOT EXISTS idx_decision_events_source ON decision_events(source_type)");
+    }
   }
   return db;
 }

@@ -1,6 +1,9 @@
 // ─── Enums ───────────────────────────────────────────────────────────────────
+// DecisionEventType, EventSourceType SSOT: @cronozen/dp-schema-public
+// SDK는 string union으로 재정의하여 dp-schema-public 의존 없이도 사용 가능
 
 export type DecisionEventType =
+  // AI-originated
   | 'agent_execution'
   | 'workflow_step'
   | 'human_approval'
@@ -8,7 +11,18 @@ export type DecisionEventType =
   | 'automated_action'
   | 'policy_decision'
   | 'escalation'
+  // Harness-originated
+  | 'file_change'
+  | 'approval'
+  | 'access'
+  | 'import'
+  | 'export'
+  | 'integration'
+  // Universal
+  | 'system'
   | 'custom';
+
+export type EventSourceType = 'ai' | 'harness' | 'manual' | 'system';
 
 export type DecisionEventStatus =
   | 'recorded'
@@ -62,6 +76,7 @@ export interface ApprovalActor {
 
 export interface RecordDecisionRequest {
   type: DecisionEventType;
+  sourceType?: EventSourceType;
   actor: DecisionActor;
   action: DecisionAction;
   occurredAt?: string;
@@ -93,6 +108,7 @@ export interface DecisionEventResponse {
   id: string;
   decisionId: string;
   type: DecisionEventType;
+  sourceType?: EventSourceType;
   status: DecisionEventStatus;
   actor: DecisionActor;
   action: DecisionAction;

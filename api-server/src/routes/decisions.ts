@@ -11,8 +11,9 @@ import { Hono } from 'hono';
 import { getDB } from '../db/connection.js';
 import { computeChainHash } from '@cronozen/dpu-core';
 import type { AuthContext } from '../middleware/auth.js';
+import type { QuotaInfo } from '../middleware/quota.js';
 
-type Env = { Variables: { auth: AuthContext } };
+type Env = { Variables: { auth: AuthContext; quota?: QuotaInfo } };
 
 export const decisionsRouter = new Hono<Env>();
 
@@ -24,6 +25,7 @@ decisionsRouter.post('/', async (c) => {
 
   const {
     type,
+    sourceType,
     actor,
     action,
     occurredAt,
@@ -76,9 +78,13 @@ decisionsRouter.post('/', async (c) => {
 
   const evidenceId = `evi_${crypto.randomUUID().replace(/-/g, '').slice(0, 16)}`;
 
+  // source_type 자동 추론: aiContext가 있으면 'ai', 명시적 값 우선
+  const resolvedSourceType = sourceType
+    || (aiContext ? 'ai' : 'manual');
+
   db.prepare(`
     INSERT INTO decision_events (
-      id, decision_id, type, status,
+      id, decision_id, type, source_type, status,
       actor_id, actor_type, actor_name, actor_metadata,
       action_type, action_description, action_input, action_output, action_metadata,
       ai_model, ai_provider, ai_confidence, ai_prompt_hash, ai_reasoning,
@@ -87,7 +93,7 @@ decisionsRouter.post('/', async (c) => {
       occurred_at, tags, metadata, idempotency_key,
       tenant_id, api_key_id, created_at, updated_at
     ) VALUES (
-      ?, ?, ?, 'recorded',
+      ?, ?, ?, ?, 'recorded',
       ?, ?, ?, ?,
       ?, ?, ?, ?, ?,
       ?, ?, ?, ?, ?,
@@ -97,7 +103,7 @@ decisionsRouter.post('/', async (c) => {
       ?, ?, ?, ?
     )
   `).run(
-    id, decisionId, type,
+    id, decisionId, type, resolvedSourceType,
     actor.id, actor.type || 'human', actor.name || null, actor.metadata ? JSON.stringify(actor.metadata) : null,
     action.type, action.description || null, action.input ? JSON.stringify(action.input) : null,
     action.output ? JSON.stringify(action.output) : null, action.metadata ? JSON.stringify(action.metadata) : null,
@@ -112,7 +118,11 @@ decisionsRouter.post('/', async (c) => {
   );
 
   const inserted = db.prepare('SELECT * FROM decision_events WHERE id = ?').get(id);
-  return c.json({ data: formatEvent(inserted as EventRow) }, 201);
+  const quota = c.get('quota');
+  return c.json({
+    data: formatEvent(inserted as EventRow),
+    ...(quota ? { quota } : {}),
+  }, 201);
 });
 
 // ─── GET /decision-events ──────────────────────────────────────────
@@ -122,6 +132,7 @@ decisionsRouter.get('/', async (c) => {
   const limit = Math.min(parseInt(c.req.query('limit') || '20'), 100);
   const offset = parseInt(c.req.query('offset') || '0');
   const type = c.req.query('type');
+  const sourceType = c.req.query('source_type');
   const status = c.req.query('status');
   const tag = c.req.query('tag');
 
@@ -130,6 +141,7 @@ decisionsRouter.get('/', async (c) => {
   const params: unknown[] = [auth.tenantId];
 
   if (type) { where += ' AND type = ?'; params.push(type); }
+  if (sourceType) { where += ' AND source_type = ?'; params.push(sourceType); }
   if (status) { where += ' AND status = ?'; params.push(status); }
   if (tag) { where += ' AND tags LIKE ?'; params.push(`%"${tag}"%`); }
 
@@ -238,6 +250,7 @@ interface EventRow {
   id: string;
   decision_id: string;
   type: string;
+  source_type: string;
   status: string;
   actor_id: string;
   actor_type: string;
@@ -282,6 +295,7 @@ function formatEvent(row: EventRow) {
     id: row.id,
     decisionId: row.decision_id,
     type: row.type,
+    sourceType: row.source_type,
     status: row.status,
     actor: {
       id: row.actor_id,

@@ -1,5 +1,7 @@
 export interface CreateDPUInput {
   domain: string;
+  type?: string;
+  source_type?: string;
   purpose: string;
   final_action: string;
   evidence_level?: string;

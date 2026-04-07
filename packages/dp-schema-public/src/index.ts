@@ -22,7 +22,18 @@ export {
   RiskLevel,
   AuditStatus,
   DataSensitivityLevel,
+  DecisionEventType,
+  EventSourceType,
 } from './enums';
+
+// ==================== Event Type Metadata ====================
+
+export {
+  EVENT_TYPE_METADATA,
+  getEventTypesByCategory,
+  getEventTypeLabel,
+  type EventTypeMetadata,
+} from './event-type-metadata';
 
 // ==================== Constants (Lock 1) ====================
 
