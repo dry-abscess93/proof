@@ -1,6 +1,6 @@
 {
   "name": "@cronozen/dp-schema-public",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cronozen Decision Proof public schema - types, enums, JSON-LD definitions",
   "license": "Apache-2.0",
   "author": "Cronozen <dev@cronozen.com> (https://cronozen.com)",

@@ -1,7 +1,7 @@
 {
   "name": "cronozen",
-  "version": "0.1.0",
-  "description": "Immutable decision evidence for AI-powered operations",
+  "version": "0.2.0",
+  "description": "Immutable decision evidence for AI and business operations — record, verify, export.",
   "license": "Apache-2.0",
   "author": "Cronozen <hello@cronozen.com>",
   "homepage": "https://github.com/cronozen/cronozen-sdk",
